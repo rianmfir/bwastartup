@@ -5,7 +5,7 @@ import (
 )
 
 type Service interface {
-	GenerateToke(userID int) (string, error)
+	GenerateToken(userID int) (string, error)
 }
 
 type jwtService struct {
@@ -13,7 +13,11 @@ type jwtService struct {
 
 var SECRET_KEY = []byte("BWASTARTUP_s3cr3T_k3Y")
 
-func (s *jwtService) GenerateToke(userID int) (string, error) {
+func NewService() *jwtService {
+	return &jwtService{}
+}
+
+func (s *jwtService) GenerateToken(userID int) (string, error) {
 	claim := jwt.MapClaims{}
 	claim["user_id"] = userID
 
