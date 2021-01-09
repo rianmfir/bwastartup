@@ -4,6 +4,7 @@ import (
 	"BWA_Startup/auth"
 	"BWA_Startup/handler"
 	"BWA_Startup/user"
+	"fmt"
 	"log"
 
 	"github.com/gin-gonic/gin"
@@ -22,6 +23,23 @@ func main() {
 	userRepository := user.NewRepository(db)
 	userService := user.NewService(userRepository)
 	authService := auth.NewService()
+
+	token, err := authService.ValidateToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxfQ.QGNefONBQ73Q197vcv8kZhATeMu4dray_CaE7en8i9U")
+	if err != nil {
+		fmt.Println("ERROR")
+		fmt.Println("ERROR")
+		fmt.Println("ERROR")
+	}
+
+	if token.Valid {
+		fmt.Println("VALID")
+		fmt.Println("VALID")
+		fmt.Println("VALID")
+	} else {
+		fmt.Println("INVALID")
+		fmt.Println("INVALID")
+		fmt.Println("INVALID")
+	}
 
 	userHandler := handler.NewUserHandler(userService, authService)
 
