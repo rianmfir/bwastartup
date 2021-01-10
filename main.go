@@ -4,7 +4,6 @@ import (
 	"BWA_Startup/auth"
 	"BWA_Startup/handler"
 	"BWA_Startup/user"
-	"fmt"
 	"log"
 
 	"github.com/gin-gonic/gin"
@@ -24,23 +23,6 @@ func main() {
 	userService := user.NewService(userRepository)
 	authService := auth.NewService()
 
-	token, err := authService.ValidateToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxfQ.QGNefONBQ73Q197vcv8kZhATeMu4dray_CaE7en8i9U")
-	if err != nil {
-		fmt.Println("ERROR")
-		fmt.Println("ERROR")
-		fmt.Println("ERROR")
-	}
-
-	if token.Valid {
-		fmt.Println("VALID")
-		fmt.Println("VALID")
-		fmt.Println("VALID")
-	} else {
-		fmt.Println("INVALID")
-		fmt.Println("INVALID")
-		fmt.Println("INVALID")
-	}
-
 	userHandler := handler.NewUserHandler(userService, authService)
 
 	router := gin.Default()
@@ -53,3 +35,13 @@ func main() {
 
 	router.Run(":7000")
 }
+
+/*
+   middleware
+   ambil nilai header Authorization: Bearer 'tokentokentoken'
+   dari header Authorization, kita ambil nilai tokennya saja
+   kita validasi token
+   kita ambil user_id
+   ambil user dari db berdasarkan user_id lewat service
+   kita set context isinya user
+*/
