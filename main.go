@@ -2,9 +2,11 @@ package main
 
 import (
 	"BWA_Startup/auth"
+	"BWA_Startup/campaign"
 	"BWA_Startup/handler"
 	"BWA_Startup/helper"
 	"BWA_Startup/user"
+	"fmt"
 	"log"
 	"net/http"
 	"strings"
@@ -24,6 +26,29 @@ func main() {
 	}
 
 	userRepository := user.NewRepository(db)
+	campaignRepository := campaign.NewRepository(db)
+
+	// tes func FindAll
+	campaigns, err := campaignRepository.FindAll()
+
+	fmt.Println("debug")
+	fmt.Println("debug")
+	fmt.Println("debug")
+	fmt.Println(len(campaigns))
+	for _, campaign := range campaigns {
+		fmt.Println(campaign.Name)
+	}
+
+	// tes func FindAll
+	campaigns2, err := campaignRepository.FindByUserID(5)
+	fmt.Println("debug")
+	fmt.Println("debug")
+	fmt.Println("debug")
+	fmt.Println(len(campaigns2))
+	for _, campaign2 := range campaigns2 {
+		fmt.Println(campaign2.Name)
+	}
+
 	userService := user.NewService(userRepository)
 	authService := auth.NewService()
 
