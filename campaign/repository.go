@@ -4,7 +4,7 @@ import (
 	"gorm.io/gorm"
 )
 
-type Respository interface {
+type Repository interface {
 	FindAll([]Campaign, error)
 	FindByUserID(userID int) ([]Campaign, error)
 }
