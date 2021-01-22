@@ -5,7 +5,7 @@ import (
 )
 
 type Repository interface {
-	FindAll([]Campaign, error)
+	FindAll() ([]Campaign, error)
 	FindByUserID(userID int) ([]Campaign, error)
 }
 

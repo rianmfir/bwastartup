@@ -9,21 +9,21 @@ type service struct {
 }
 
 func NewService(repository Repository) *service {
-	return &service(repository)
+	return &service{repository}
 }
 
 func (s *service) FindCampaigns(userID int) ([]Campaign, error) {
 	if userID != 0 {
 		campaigns, err := s.repository.FindByUserID(userID)
-		iff err !=nil {
-			return campaingns, err
+		if err != nil {
+			return campaigns, err
 		}
 		return campaigns, nil
 	}
-	
+
 	campaigns, err := s.repository.FindAll()
-		iff err !=nil {
-			return campaingns, err
-		}
-		return campaigns, nil
+	if err != nil {
+		return campaigns, err
+	}
+	return campaigns, nil
 }
