@@ -6,7 +6,6 @@ import (
 	"BWA_Startup/handler"
 	"BWA_Startup/helper"
 	"BWA_Startup/user"
-	"fmt"
 	"log"
 	"net/http"
 	"strings"
@@ -34,9 +33,6 @@ func main() {
 
 	userHandler := handler.NewUserHandler(userService, authService)
 	campaignHandler := handler.NewCampaignHandler(campaignService)
-
-	campaigns, _ := campaignService.GetCampaigns(7)
-	fmt.Println(len(campaigns))
 
 	router := gin.Default()
 	router.Static("/images", "./images")
