@@ -129,6 +129,7 @@ func (h *campaignHandler) UpdateCampaign(c *gin.Context) {
 // Tangkap input dan ubah ke struct input
 // Save image campaign ke suatu folder
 // Service (Kondisi manggil point 2 di repo, panggil repo point 1)
+
 // Repository :
 // 			    1. create image/save data image ke dalam tabel campaign_images
 //				2. ubah is_Primary true ke false
