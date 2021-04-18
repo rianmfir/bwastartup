@@ -138,6 +138,9 @@ func (h *campaignHandler) UploadImage(c *gin.Context) {
 		c.JSON(http.StatusUnprocessableEntity, response)
 		return
 	}
+	currentUser := c.MustGet("currentUser").(user.User)
+	input.User = currentUser
+	userID := currentUser.ID
 
 	file, err := c.FormFile("file")
 	if err != nil {
@@ -146,9 +149,6 @@ func (h *campaignHandler) UploadImage(c *gin.Context) {
 		c.JSON(http.StatusBadGateway, response)
 		return
 	}
-
-	currentUser := c.MustGet("currentUser").(user.User)
-	userID := currentUser.ID
 
 	path := fmt.Sprintf("images/%d-%s", userID, file.Filename)
 
