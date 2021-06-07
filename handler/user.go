@@ -20,9 +20,6 @@ func NewUserHandler(userService user.Service, authService auth.Service) *userHan
 }
 
 func (h *userHandler) RegisterUser(c *gin.Context) {
-	// tangkap input dari user
-	// map input dari user ke struct RegisterUserInput
-	// struct di atas kita passing sebagai parameter service
 	var input user.RegisterUserInput
 
 	err := c.ShouldBindJSON(&input)
@@ -57,13 +54,6 @@ func (h *userHandler) RegisterUser(c *gin.Context) {
 }
 
 func (h *userHandler) Login(c *gin.Context) {
-	//user memasukan input (email & password)
-	//input ditangkap handler
-	//mapping dari input user ke input struct
-	//input struct passing service
-	//di service mencari dengan bantuan repository user dengan email x
-	//mencocokan password
-
 	var input user.LoginInput
 
 	err := c.ShouldBindJSON(&input)
@@ -151,7 +141,6 @@ func (h *userHandler) UploadAvatar(c *gin.Context) {
 		return
 	}
 
-	// harusnya dapat dari JWT
 	currentUser := c.MustGet("currentUser").(user.User)
 	userID := currentUser.ID
 
@@ -180,4 +169,14 @@ func (h *userHandler) UploadAvatar(c *gin.Context) {
 
 	c.JSON(http.StatusOK, response)
 
+}
+
+func (h *userHandler) FetchUser(c *gin.Context) {
+	currentUser := c.MustGet("currentUser").(user.User)
+
+	formatter := user.FormatUser(currentUser, "")
+
+	response := helper.APIResponse("Successfuly fetch user data", http.StatusOK, "success", formatter)
+
+	c.JSON(http.StatusOK, response)
 }
